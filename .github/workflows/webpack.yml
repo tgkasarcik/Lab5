@@ -30,7 +30,7 @@ jobs:
     - name: Upload Static Files
       uses: actions/upload-pages-artifact@v3
       with:
-        path: artifacts/
+        path: dist/
         
   deploy:
     needs: build
