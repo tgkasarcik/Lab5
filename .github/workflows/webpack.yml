@@ -26,3 +26,8 @@ jobs:
       run: |
         npm install
         npx webpack
+
+    - name: Upload Static Files
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: build/
