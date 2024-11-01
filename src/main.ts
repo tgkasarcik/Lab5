@@ -24,10 +24,10 @@ var skybox: Skybox;
 const canvas: HTMLCanvasElement = document.getElementById("webgl-canvas") as HTMLCanvasElement;
 export const gl: WebGL2RenderingContext = canvas.getContext("webgl2");
 var rotating: boolean = true;
-let viewportWidth = canvas.width;
-let viewportHeight = canvas.height;
-let rotaionSpeed = 1;
-let rotationRad = 0;
+var viewportWidth: number;
+var viewportHeight: number;
+let rotaionSpeed: number = 1;
+let rotationRad: number = 0;
 var then = 0;
 
 main();
@@ -41,6 +41,14 @@ function createBuffer(gl: WebGL2RenderingContext, data: number[]): WebGLBuffer {
 
 export function setRotationState(enabled: boolean) {
     rotating = enabled;
+}
+
+function setupCanvas(): void {
+    canvas.width = document.body.clientWidth;
+    canvas.height = document.body.clientHeight;
+
+    viewportWidth = canvas.width;
+    viewportHeight = canvas.height;
 }
 
 function setupScene(): void {
@@ -112,6 +120,7 @@ function main(): void {
     initBuffers(gl);
     initTextures(gl);
     generateMaterials();
+    setupCanvas();
     setupScene();
     requestAnimationFrame(drawScene);
 
