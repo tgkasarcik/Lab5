@@ -1,7 +1,7 @@
 import { mat4, vec3 } from "gl-matrix";
 
 export class Camera {
-    private static FOV = 80;
+    private static DEFAULT_FOV = 80;
     private static ASPECT_RATIO = 16.0/9.0;
     private static NEAR_CLIP = 0.1;
     private static FAR_CLIP = 100.0;
@@ -16,6 +16,7 @@ export class Camera {
     private pitch;
     private yaw;
     private roll;
+    private fov;
 
     constructor(position: vec3, coi: vec3, up: vec3) {
         this.position = position;
@@ -30,6 +31,7 @@ export class Camera {
         this.pitch = Math.asin(this.direction[1]);
         this.yaw = Math.atan2(this.direction[2], this.direction[0]);
         this.roll = 0; // FIXME this assumes y axis is up vector
+        this.fov = Camera.DEFAULT_FOV;
 
         this.createVMatrix();
         this.createPMatrix();
@@ -84,6 +86,11 @@ export class Camera {
         this.createVMatrix();
     }
 
+    setFOV(newFOV: number): void {
+        this.fov = newFOV;
+        this.createPMatrix();
+    }
+
     /**
     * Create a vMatrix for this camera using its current properties
     */
@@ -104,6 +111,6 @@ export class Camera {
     private createPMatrix(): void {
         this.pMatrix = mat4.create();
         mat4.identity(this.pMatrix);
-        mat4.perspective(this.pMatrix, Camera.FOV, Camera.ASPECT_RATIO, Camera.NEAR_CLIP, Camera.FAR_CLIP);
+        mat4.perspective(this.pMatrix, this.fov, Camera.ASPECT_RATIO, Camera.NEAR_CLIP, Camera.FAR_CLIP);
     }
 }

@@ -25,6 +25,7 @@ var skybox: Skybox;
 const canvas: HTMLCanvasElement = document.getElementById("webgl-canvas") as HTMLCanvasElement;
 export const gl: WebGL2RenderingContext = canvas.getContext("webgl2");
 const rotatingCheck: HTMLInputElement = <HTMLInputElement> document.getElementById("rotations");
+const fovSlider: HTMLInputElement = <HTMLInputElement> document.getElementById("fov");
 var rotating: boolean = true;
 var viewportWidth: number;
 var viewportHeight: number;
@@ -134,5 +135,10 @@ function main(): void {
     // Handle checkbox clicks
     rotatingCheck.onclick = () => {
         setRotationState(rotatingCheck.checked);
+    }
+
+    fovSlider.oninput = () => {
+        console.log("slider clicked with value=" + fovSlider.valueAsNumber);
+        camera.setFOV(fovSlider.valueAsNumber);
     }
 }
