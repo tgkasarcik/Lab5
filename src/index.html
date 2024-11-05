@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+
     <title>
         <%= htmlWebpackPlugin.options.title %>
     </title>
@@ -14,10 +17,16 @@
     <!-- <h1>
         <%= htmlWebpackPlugin.options.title %>
     </h1> -->
-    <h1>WebGL Realtime Lighting</h1>
-    <canvas id="webgl-canvas" width="1280" height="720"></canvas>
-    <!-- <p>Controls:</p>
+    <div>
+        <h1>WebGL Realtime Lighting</h1>
+    </div>
+    <div class="canvas-container">
+        <canvas id="webgl-canvas" width="800" height="450"></canvas>
+    </div>
+    <p>Controls:</p>
     <p>- W/A/S/D/Up/Down - move light</p>
-    <p>- +/- - enable/disable rotations</p> -->
+    <p>- +/- - enable/disable rotations</p>
+    <input type="checkbox" id="rotations" checked>
+    <label for="rotations">Rotations</label>
 </body>
 </html>

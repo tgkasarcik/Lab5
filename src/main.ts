@@ -10,6 +10,7 @@ import { initBuffers } from "./buffers";
 import { handleKeyboardInput } from "./input";
 import { initShaders } from "./shaders";
 import { cubemapTexture, initTextures } from "./textures";
+import "./style.css";
 
 let BACKGROUND_COLOR = [102 / 255, 102 / 255, 102 / 255, 1.0];
 var camera: Camera;
@@ -23,6 +24,7 @@ var skybox: Skybox;
 // Initialize the WebGL context.
 const canvas: HTMLCanvasElement = document.getElementById("webgl-canvas") as HTMLCanvasElement;
 export const gl: WebGL2RenderingContext = canvas.getContext("webgl2");
+const rotatingCheck: HTMLInputElement = <HTMLInputElement> document.getElementById("rotations");
 var rotating: boolean = true;
 var viewportWidth: number;
 var viewportHeight: number;
@@ -44,8 +46,8 @@ export function setRotationState(enabled: boolean) {
 }
 
 function setupCanvas(): void {
-    canvas.width = document.body.clientWidth;
-    canvas.height = document.body.clientHeight;
+    // canvas.width = document.body.clientWidth;
+    // canvas.height = document.body.clientHeight;
 
     viewportWidth = canvas.width;
     viewportHeight = canvas.height;
@@ -128,4 +130,9 @@ function main(): void {
     window.addEventListener('keydown', (event) => {
         handleKeyboardInput(event.key, camera, light);
     });
+
+    // Handle checkbox clicks
+    rotatingCheck.onclick = () => {
+        setRotationState(rotatingCheck.checked);
+    }
 }
